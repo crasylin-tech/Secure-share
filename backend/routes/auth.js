@@ -2,84 +2,106 @@ const router  = require('express').Router();
 const bcrypt  = require('bcryptjs');
 const jwt     = require('jsonwebtoken');
 const db      = require('../db');
+const auth    = require('../middleware/auth');
 
-// Генерация уникального кода организации
-function genOrgCode() {
-  return 'ORG' + Math.random().toString(36).slice(2, 7).toUpperCase();
+function genCode(prefix) {
+  return prefix + Math.random().toString(36).slice(2, 8).toUpperCase();
 }
 
-// POST /api/auth/register — регистрация организации + первый администратор
-router.post('/register', async (req, res) => {
+// ── POST /api/auth/register-org ── Регистрация организации (создаёт admin)
+router.post('/register-org', async (req, res) => {
   const { orgName, name, email, password } = req.body;
   if (!orgName || !name || !email || !password)
     return res.status(400).json({ error: 'Заполните все поля' });
   if (password.length < 6)
-    return res.status(400).json({ error: 'Пароль должен быть не менее 6 символов' });
+    return res.status(400).json({ error: 'Пароль не менее 6 символов' });
 
   try {
-    // Проверка уникальности организации и email
-    const orgExists = await db.query('SELECT id FROM organizations WHERE LOWER(name)=LOWER($1)', [orgName]);
-    if (orgExists.rows.length) return res.status(409).json({ error: 'Организация с таким названием уже существует' });
+    if ((await db.query('SELECT id FROM organizations WHERE LOWER(name)=LOWER($1)', [orgName])).rows.length)
+      return res.status(409).json({ error: 'Организация с таким названием уже существует' });
+    if ((await db.query('SELECT id FROM users WHERE email=$1', [email])).rows.length)
+      return res.status(409).json({ error: 'Email уже занят' });
 
-    const userExists = await db.query('SELECT id FROM users WHERE email=$1', [email]);
-    if (userExists.rows.length) return res.status(409).json({ error: 'Email уже занят' });
+    let orgCode = genCode('ORG');
+    while ((await db.query('SELECT id FROM organizations WHERE code=$1', [orgCode])).rows.length)
+      orgCode = genCode('ORG');
 
-    // Создание организации
-    let code = genOrgCode();
-    // Гарантируем уникальность кода
-    while ((await db.query('SELECT id FROM organizations WHERE code=$1', [code])).rows.length) {
-      code = genOrgCode();
-    }
+    const org = (await db.query(
+      'INSERT INTO organizations (name, code) VALUES ($1,$2) RETURNING *',
+      [orgName, orgCode]
+    )).rows[0];
 
-    const orgResult = await db.query(
-      'INSERT INTO organizations (name, code) VALUES ($1, $2) RETURNING *',
-      [orgName, code]
-    );
-    const org = orgResult.rows[0];
-
-    // Создание администратора
     const hash = await bcrypt.hash(password, 10);
-    const userResult = await db.query(
-      'INSERT INTO users (org_id, name, email, password_hash, role) VALUES ($1,$2,$3,$4,$5) RETURNING id,name,email,role,org_id',
-      [org.id, name, email, hash, 'admin']
-    );
-    const user = userResult.rows[0];
+    const user = (await db.query(
+      `INSERT INTO users (org_id, name, email, password_hash, role)
+       VALUES ($1,$2,$3,$4,'admin') RETURNING id,name,email,role,org_id`,
+      [org.id, name, email, hash]
+    )).rows[0];
 
-    const token = jwt.sign(
-      { userId: user.id, orgId: org.id, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
-
-    res.status(201).json({
-      token,
-      user: { id: user.id, name: user.name, email: user.email, role: user.role, orgId: org.id },
-      org:  { id: org.id, name: org.name, code: org.code },
-    });
+    const token = jwt.sign({ userId: user.id, orgId: org.id, role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    res.status(201).json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role, orgId: org.id }, org });
   } catch (err) {
-    console.error('register error:', err);
+    console.error(err);
     res.status(500).json({ error: 'Ошибка сервера' });
   }
 });
 
-// POST /api/auth/login — вход администратора по email
+// ── POST /api/auth/register-employee ── Самостоятельная регистрация сотрудника
+// Создаёт аккаунт БЕЗ организации. Организацию присвоит администратор через приглашение.
+router.post('/register-employee', async (req, res) => {
+  const { name, email, password } = req.body;
+  if (!name || !email || !password)
+    return res.status(400).json({ error: 'Заполните все поля' });
+  if (password.length < 6)
+    return res.status(400).json({ error: 'Пароль не менее 6 символов' });
+
+  try {
+    if ((await db.query('SELECT id FROM users WHERE email=$1', [email])).rows.length)
+      return res.status(409).json({ error: 'Email уже занят' });
+
+    // Личный invite_code сотрудника — уникальный, сотрудник передаёт его администратору
+    let inviteCode = genCode('EMP');
+    while ((await db.query('SELECT id FROM users WHERE invite_code=$1', [inviteCode])).rows.length)
+      inviteCode = genCode('EMP');
+
+    const hash = await bcrypt.hash(password, 10);
+    const user = (await db.query(
+      `INSERT INTO users (org_id, name, email, password_hash, role, invite_code)
+       VALUES (NULL,$1,$2,$3,'employee',$4) RETURNING id,name,email,role,org_id,invite_code`,
+      [name, email, hash, inviteCode]
+    )).rows[0];
+
+    // Сотрудник без организации — token выдаём, но orgId=null
+    const token = jwt.sign({ userId: user.id, orgId: null, role: 'employee' }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    res.status(201).json({
+      token,
+      user: { id: user.id, name: user.name, email: user.email, role: user.role, orgId: null, inviteCode: user.invite_code },
+      org: null,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Ошибка сервера' });
+  }
+});
+
+// ── POST /api/auth/login ── Вход для всех (admin и employee)
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password)
     return res.status(400).json({ error: 'Введите email и пароль' });
 
   try {
-    const result = await db.query(
+    const r = await db.query(
       `SELECT u.*, o.name AS org_name, o.code AS org_code
-       FROM users u JOIN organizations o ON o.id=u.org_id
+       FROM users u LEFT JOIN organizations o ON o.id = u.org_id
        WHERE u.email=$1`,
       [email]
     );
-    if (!result.rows.length) return res.status(401).json({ error: 'Пользователь не найден' });
+    if (!r.rows.length) return res.status(401).json({ error: 'Пользователь не найден' });
+    const user = r.rows[0];
 
-    const user = result.rows[0];
-    const ok = await bcrypt.compare(password, user.password_hash);
-    if (!ok) return res.status(401).json({ error: 'Неверный пароль' });
+    if (!await bcrypt.compare(password, user.password_hash))
+      return res.status(401).json({ error: 'Неверный пароль' });
 
     const token = jwt.sign(
       { userId: user.id, orgId: user.org_id, role: user.role },
@@ -87,51 +109,47 @@ router.post('/login', async (req, res) => {
       { expiresIn: '7d' }
     );
 
+    const org = user.org_id
+      ? { id: user.org_id, name: user.org_name, code: user.org_code }
+      : null;
+
     res.json({
       token,
-      user: { id: user.id, name: user.name, email: user.email, role: user.role, orgId: user.org_id },
-      org:  { id: user.org_id, name: user.org_name, code: user.org_code },
+      user: { id: user.id, name: user.name, email: user.email, role: user.role, orgId: user.org_id, inviteCode: user.invite_code },
+      org,
     });
   } catch (err) {
-    console.error('login error:', err);
+    console.error(err);
     res.status(500).json({ error: 'Ошибка сервера' });
   }
 });
 
-// POST /api/auth/login-employee — вход сотрудника по коду организации
-router.post('/login-employee', async (req, res) => {
-  const { orgCode, email, password } = req.body;
-  if (!orgCode || !email || !password)
-    return res.status(400).json({ error: 'Заполните все поля' });
-
+// ── GET /api/auth/me ── Обновить сессию (после принятия приглашения org меняется)
+router.get('/me', auth, async (req, res) => {
   try {
-    const orgResult = await db.query('SELECT * FROM organizations WHERE code=$1', [orgCode.toUpperCase()]);
-    if (!orgResult.rows.length) return res.status(401).json({ error: 'Организация с таким кодом не найдена' });
-    const org = orgResult.rows[0];
-
-    const userResult = await db.query(
-      'SELECT * FROM users WHERE email=$1 AND org_id=$2',
-      [email, org.id]
+    const r = await db.query(
+      `SELECT u.*, o.name AS org_name, o.code AS org_code
+       FROM users u LEFT JOIN organizations o ON o.id = u.org_id
+       WHERE u.id=$1`,
+      [req.userId]
     );
-    if (!userResult.rows.length) return res.status(401).json({ error: 'Пользователь не найден в этой организации' });
-    const user = userResult.rows[0];
+    if (!r.rows.length) return res.status(404).json({ error: 'Пользователь не найден' });
+    const user = r.rows[0];
 
-    const ok = await bcrypt.compare(password, user.password_hash);
-    if (!ok) return res.status(401).json({ error: 'Неверный пароль' });
-
+    // Перевыпускаем токен с актуальным orgId
     const token = jwt.sign(
-      { userId: user.id, orgId: org.id, role: user.role },
+      { userId: user.id, orgId: user.org_id, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
 
+    const org = user.org_id ? { id: user.org_id, name: user.org_name, code: user.org_code } : null;
     res.json({
       token,
-      user: { id: user.id, name: user.name, email: user.email, role: user.role, orgId: org.id },
-      org:  { id: org.id, name: org.name, code: org.code },
+      user: { id: user.id, name: user.name, email: user.email, role: user.role, orgId: user.org_id, inviteCode: user.invite_code },
+      org,
     });
   } catch (err) {
-    console.error('login-employee error:', err);
     res.status(500).json({ error: 'Ошибка сервера' });
   }
 });

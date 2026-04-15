@@ -7,259 +7,260 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0a0c10;--surface:#13161d;--surface2:#1a1e28;--surface3:#222736;
-  --border:#2a2f3d;--border2:#353b4d;--accent:#4f7cff;--accent2:#7c5cfc;
-  --accent-glow:rgba(79,124,255,0.15);--green:#2ecc71;--green-bg:rgba(46,204,113,0.1);
-  --red:#e74c3c;--red-bg:rgba(231,76,60,0.1);--amber:#f39c12;--amber-bg:rgba(243,156,18,0.1);
-  --text:#eef0f6;--text2:#8b92a8;--text3:#545b72;--radius:12px;--radius-sm:8px;
-}
+:root{--bg:#0a0c10;--surface:#13161d;--surface2:#1a1e28;--surface3:#222736;--border:#2a2f3d;--border2:#353b4d;--accent:#4f7cff;--accent2:#7c5cfc;--accent-glow:rgba(79,124,255,0.15);--green:#2ecc71;--green-bg:rgba(46,204,113,0.1);--red:#e74c3c;--red-bg:rgba(231,76,60,0.1);--amber:#f39c12;--amber-bg:rgba(243,156,18,0.1);--text:#eef0f6;--text2:#8b92a8;--text3:#545b72;--radius:12px;--radius-sm:8px}
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;overflow:hidden}
 #root{height:100%;display:flex;flex-direction:column}
 .auth-wrap{flex:1;display:flex;align-items:center;justify-content:center;background:var(--bg);position:relative;overflow:hidden}
 .auth-wrap::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(79,124,255,0.08) 0%,transparent 70%);top:-100px;left:-100px;pointer-events:none}
 .auth-wrap::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(124,92,252,0.07) 0%,transparent 70%);bottom:-100px;right:-100px;pointer-events:none}
-.auth-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:48px 44px;width:460px;max-width:95vw;position:relative;z-index:1}
-.auth-logo{display:flex;align-items:center;gap:10px;margin-bottom:36px}
+.auth-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:44px;width:480px;max-width:95vw;position:relative;z-index:1;max-height:95vh;overflow-y:auto}
+.auth-logo{display:flex;align-items:center;gap:10px;margin-bottom:32px}
 .auth-logo-icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center}
-.auth-logo-icon svg,.auth-logo-icon svg *{fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .auth-logo-text{font-family:'Syne',sans-serif;font-size:20px;font-weight:700}
 .auth-logo-text span{color:var(--accent)}
-.auth-title{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;margin-bottom:6px;letter-spacing:-0.5px}
-.auth-subtitle{color:var(--text2);font-size:14px;margin-bottom:32px}
-.field{margin-bottom:18px}
-.field label{display:block;font-size:13px;font-weight:500;color:var(--text2);margin-bottom:7px}
+.auth-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;margin-bottom:6px;letter-spacing:-0.5px}
+.auth-subtitle{color:var(--text2);font-size:13px;margin-bottom:28px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--text2);margin-bottom:6px}
 .field input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 14px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s}
 .field input:focus{border-color:var(--accent)}
 .field input::placeholder{color:var(--text3)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;border:none;transition:all 0.2s;line-height:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;border:none;transition:all 0.2s;line-height:1}
 .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;width:100%}
 .btn-primary:hover:not(:disabled){opacity:0.88;transform:translateY(-1px)}
 .btn-primary:disabled{opacity:0.5;cursor:not-allowed}
 .btn-secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
 .btn-secondary:hover{border-color:var(--border2);background:var(--surface3)}
+.btn-success{background:var(--green-bg);color:var(--green);border:1px solid rgba(46,204,113,0.25)}
+.btn-success:hover{background:rgba(46,204,113,0.2)}
 .btn-danger{background:var(--red-bg);color:var(--red);border:1px solid rgba(231,76,60,0.25)}
 .btn-danger:hover{background:rgba(231,76,60,0.2)}
-.btn-sm{padding:7px 14px;font-size:13px}
+.btn-sm{padding:7px 13px;font-size:13px}
 .btn-icon{width:34px;height:34px;padding:0;border-radius:var(--radius-sm)}
-.auth-switch{text-align:center;margin-top:22px;font-size:13px;color:var(--text2)}
-.auth-switch a{color:var(--accent);cursor:pointer}
-.error-msg{background:var(--red-bg);border:1px solid rgba(231,76,60,0.25);color:var(--red);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;margin-bottom:16px}
-.tabs{display:flex;gap:4px;background:var(--surface2);border-radius:var(--radius-sm);padding:4px;margin-bottom:28px}
+.auth-links{display:flex;flex-direction:column;gap:8px;margin-top:18px;text-align:center;font-size:13px;color:var(--text2)}
+.auth-links a{color:var(--accent);cursor:pointer}
+.error-msg{background:var(--red-bg);border:1px solid rgba(231,76,60,0.25);color:var(--red);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;margin-bottom:14px}
+.success-msg{background:var(--green-bg);border:1px solid rgba(46,204,113,0.25);color:var(--green);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;margin-bottom:14px}
+.tabs{display:flex;gap:4px;background:var(--surface2);border-radius:var(--radius-sm);padding:4px;margin-bottom:24px}
 .tab{flex:1;padding:8px;text-align:center;font-size:13px;font-weight:500;cursor:pointer;border-radius:6px;color:var(--text2);transition:all 0.2s}
 .tab.active{background:var(--surface3);color:var(--text);border:1px solid var(--border)}
+.invite-code-box{background:var(--surface2);border:2px solid var(--accent);border-radius:var(--radius);padding:20px 24px;text-align:center;margin:20px 0}
+.invite-code-box .label{font-size:12px;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px}
+.invite-code-box .code{font-family:monospace;font-size:28px;font-weight:700;color:var(--accent);letter-spacing:4px}
+.invite-code-box .hint{font-size:12px;color:var(--text3);margin-top:8px}
+.pending-screen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;gap:20px}
+.pending-screen h2{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;text-align:center}
+.pending-screen p{font-size:14px;color:var(--text2);text-align:center;max-width:380px}
+.inv-list{width:100%;max-width:480px;display:flex;flex-direction:column;gap:10px}
+.inv-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.inv-card-info{flex:1;min-width:0}
+.inv-card-org{font-size:15px;font-weight:500}
+.inv-card-date{font-size:12px;color:var(--text2);margin-top:2px}
+.inv-card-actions{display:flex;gap:8px;flex-shrink:0}
 .app{flex:1;display:flex;overflow:hidden}
 .sidebar{width:260px;min-width:260px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
-.sidebar-header{padding:20px 20px 16px;border-bottom:1px solid var(--border)}
-.sidebar-logo{display:flex;align-items:center;gap:9px;margin-bottom:14px}
-.sidebar-logo-icon{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center}
-.sidebar-logo-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700}
-.sidebar-org{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:7px 10px;display:flex;align-items:center;justify-content:space-between}
-.sidebar-org-name{font-weight:500;color:var(--text);font-size:13px}
-.badge-role{font-size:10px;padding:2px 8px;border-radius:99px;background:var(--accent-glow);color:var(--accent);font-weight:500}
-.sidebar-nav{flex:1;overflow-y:auto;padding:12px 10px}
-.nav-section{margin-bottom:6px}
-.nav-section-title{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:0.8px;text-transform:uppercase;padding:8px 10px 4px}
-.nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--radius-sm);cursor:pointer;font-size:14px;color:var(--text2);transition:all 0.15s;margin-bottom:2px}
+.sidebar-header{padding:18px 18px 14px;border-bottom:1px solid var(--border)}
+.sidebar-logo{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.sidebar-logo-icon{width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center}
+.sidebar-logo-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:700}
+.sidebar-org{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:7px 10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.sidebar-org-name{font-weight:500;color:var(--text);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.badge-role{font-size:10px;padding:2px 8px;border-radius:99px;background:var(--accent-glow);color:var(--accent);font-weight:500;flex-shrink:0}
+.sidebar-nav{flex:1;overflow-y:auto;padding:10px 8px}
+.nav-section{margin-bottom:4px}
+.nav-section-title{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:0.8px;text-transform:uppercase;padding:8px 10px 4px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--radius-sm);cursor:pointer;font-size:14px;color:var(--text2);transition:all 0.15s;margin-bottom:1px}
 .nav-item:hover{background:var(--surface2);color:var(--text)}
 .nav-item.active{background:var(--accent-glow);color:var(--accent)}
-.nav-item .icon{width:16px;height:16px;flex-shrink:0}
-.nav-badge{margin-left:auto;background:var(--accent);color:#fff;font-size:10px;font-weight:600;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 5px}
-.sidebar-footer{padding:14px 10px;border-top:1px solid var(--border)}
+.nav-item .ni{width:15px;height:15px;flex-shrink:0}
+.nav-badge{margin-left:auto;background:var(--accent);color:#fff;font-size:10px;font-weight:600;min-width:17px;height:17px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.sidebar-footer{padding:12px 8px;border-top:1px solid var(--border)}
 .user-info{display:flex;align-items:center;gap:10px;padding:8px 10px}
 .user-name{font-size:13px;font-weight:500;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .user-role{font-size:11px;color:var(--text2)}
 .logout-btn{margin-left:auto;cursor:pointer;color:var(--text3);transition:color 0.2s;background:none;border:none;display:flex;align-items:center}
 .logout-btn:hover{color:var(--red)}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
-.main-header{padding:20px 28px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface);flex-shrink:0}
-.main-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;letter-spacing:-0.3px}
-.main-subtitle{font-size:13px;color:var(--text2);margin-top:1px}
-.main-body{flex:1;overflow-y:auto;padding:24px 28px}
+.main-header{padding:18px 26px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface);flex-shrink:0}
+.main-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;letter-spacing:-0.3px}
+.main-subtitle{font-size:12px;color:var(--text2);margin-top:1px}
+.main-body{flex:1;overflow-y:auto;padding:22px 26px}
 .chat-layout{flex:1;display:flex;overflow:hidden}
-.chat-list-panel{width:280px;min-width:280px;border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--surface);overflow:hidden}
-.chat-list-header{padding:16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.chat-list-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:600}
-.chat-list-body{flex:1;overflow-y:auto;padding:8px}
-.chat-item{padding:12px;border-radius:var(--radius-sm);cursor:pointer;transition:background 0.15s;margin-bottom:2px}
+.chat-list-panel{width:270px;min-width:270px;border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--surface);overflow:hidden}
+.chat-list-header{padding:14px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.chat-list-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:600}
+.chat-list-body{flex:1;overflow-y:auto;padding:6px}
+.chat-item{padding:11px 12px;border-radius:var(--radius-sm);cursor:pointer;transition:background 0.15s;margin-bottom:2px}
 .chat-item:hover{background:var(--surface2)}
 .chat-item.active{background:var(--accent-glow);border:1px solid rgba(79,124,255,0.2)}
-.chat-item-name{font-size:14px;font-weight:500;color:var(--text);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.chat-item-meta{font-size:12px;color:var(--text2)}
+.chat-item-name{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-item-meta{font-size:11px;color:var(--text2);margin-top:2px}
 .chat-panel{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.chat-header{padding:14px 20px;border-bottom:1px solid var(--border);background:var(--surface);display:flex;align-items:center;gap:12px;flex-shrink:0}
-.chat-header-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:600}
-.chat-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px}
+.chat-header{padding:12px 18px;border-bottom:1px solid var(--border);background:var(--surface);display:flex;align-items:center;gap:10px;flex-shrink:0}
+.chat-messages{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:14px}
 .chat-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text3);gap:12px;padding:40px}
-.msg{display:flex;gap:10px}
+.msg{display:flex;gap:8px}
 .msg.own{flex-direction:row-reverse}
-.msg-ava{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
+.msg-ava{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0}
 .msg-bubble{max-width:65%}
-.msg-sender{font-size:11px;color:var(--text3);margin-bottom:4px;font-weight:500}
+.msg-sender{font-size:11px;color:var(--text3);margin-bottom:3px;font-weight:500}
 .msg.own .msg-sender{text-align:right}
-.file-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;display:flex;align-items:center;gap:10px;min-width:220px;cursor:pointer;transition:border-color 0.2s;text-decoration:none}
+.file-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 13px;display:flex;align-items:center;gap:10px;min-width:210px;cursor:pointer;transition:border-color 0.2s;text-decoration:none}
 .file-card:hover{border-color:var(--border2)}
-.file-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;letter-spacing:-0.5px}
+.file-icon{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;letter-spacing:-0.5px}
 .file-info{flex:1;min-width:0}
 .file-name{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
-.file-size{font-size:11px;color:var(--text2);margin-top:2px}
-.msg-time{font-size:10px;color:var(--text3);margin-top:5px;text-align:right}
-.chat-input-area{padding:14px 20px;border-top:1px solid var(--border);background:var(--surface);flex-shrink:0}
-.chat-input-row{display:flex;align-items:center;gap:10px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:8px 8px 8px 16px}
-.chat-input-row:focus-within{border-color:var(--accent)}
+.file-size{font-size:11px;color:var(--text2);margin-top:1px}
+.msg-time{font-size:10px;color:var(--text3);margin-top:4px;text-align:right}
+.chat-input-area{padding:12px 18px;border-top:1px solid var(--border);background:var(--surface);flex-shrink:0}
+.chat-input-row{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:7px 7px 7px 14px}
 .chat-input-placeholder{flex:1;font-size:14px;color:var(--text3)}
 .file-attach-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:var(--radius-sm);background:var(--accent-glow);color:var(--accent);font-size:13px;font-weight:500;cursor:pointer;border:1px solid rgba(79,124,255,0.2);transition:all 0.2s}
 .file-attach-btn:hover{background:rgba(79,124,255,0.25)}
 .uploading{opacity:0.6;pointer-events:none}
 .no-chat-selected{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text3);gap:14px}
-.org-files-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:20px}
-.org-file-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:10px;transition:border-color 0.2s}
+.new-chat-btn-row{padding:8px;border-top:1px solid var(--border)}
+.org-files-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-top:18px}
+.org-file-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;gap:9px}
 .org-file-card:hover{border-color:var(--border2)}
 .org-file-actions{display:flex;gap:6px;margin-top:auto}
-.upload-drop{border:2px dashed var(--border2);border-radius:var(--radius);padding:36px 24px;text-align:center;cursor:pointer;transition:all 0.2s;color:var(--text2);margin-bottom:20px}
+.upload-drop{border:2px dashed var(--border2);border-radius:var(--radius);padding:32px 24px;text-align:center;cursor:pointer;transition:all 0.2s;color:var(--text2);margin-bottom:18px}
 .upload-drop:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
-.employees-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:20px}
-.employee-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:12px}
+.employees-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:18px}
+.employee-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:10px}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:100;backdrop-filter:blur(4px)}
-.modal{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px;width:440px;max-width:95vw;max-height:90vh;overflow-y:auto}
-.modal-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:6px}
-.modal-sub{font-size:13px;color:var(--text2);margin-bottom:24px}
-.modal-footer{display:flex;gap:10px;justify-content:flex-end;margin-top:24px}
-.settings-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;margin-bottom:16px}
-.settings-section-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.settings-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px;width:420px;max-width:95vw;max-height:90vh;overflow-y:auto}
+.modal-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:5px}
+.modal-sub{font-size:13px;color:var(--text2);margin-bottom:20px}
+.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
+.settings-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;margin-bottom:14px}
+.settings-section-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.settings-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)}
 .settings-row:last-child{border-bottom:none;padding-bottom:0}
-.chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:3px 10px;border-radius:99px}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 9px;border-radius:99px}
 .chip-blue{background:var(--accent-glow);color:var(--accent)}
 .chip-green{background:var(--green-bg);color:var(--green)}
 .chip-red{background:var(--red-bg);color:var(--red)}
-.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:60px 20px;color:var(--text3)}
+.chip-amber{background:var(--amber-bg);color:var(--amber)}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:50px 20px;color:var(--text3)}
 .empty-state p{font-size:14px;text-align:center;max-width:240px}
-.new-chat-btn-row{padding:10px;border-top:1px solid var(--border)}
-.alert{padding:12px 16px;border-radius:var(--radius-sm);font-size:13px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.alert{padding:11px 14px;border-radius:var(--radius-sm);font-size:13px;margin-bottom:14px;display:flex;align-items:flex-start;gap:8px}
 .alert-green{background:var(--green-bg);border:1px solid rgba(46,204,113,0.25);color:var(--green)}
-.alert-red{background:var(--red-bg);border:1px solid rgba(231,76,60,0.25);color:var(--red)}
-.search-box{position:relative;margin-bottom:16px}
-.search-box input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px 10px 36px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s}
+.alert-amber{background:var(--amber-bg);border:1px solid rgba(243,156,18,0.25);color:var(--amber)}
+.search-box{position:relative;margin-bottom:14px}
+.search-box input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 14px 9px 34px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s}
 .search-box input:focus{border-color:var(--accent)}
-.search-box svg{position:absolute;left:10px;top:50%;transform:translateY(-50%)}
-.user-list{border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;max-height:240px;overflow-y:auto;margin-bottom:8px}
-.user-list-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border);transition:background 0.15s}
+.search-box svg{position:absolute;left:9px;top:50%;transform:translateY(-50%)}
+.user-list{border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;max-height:230px;overflow-y:auto;margin-bottom:8px}
+.user-list-item{display:flex;align-items:center;gap:10px;padding:10px 13px;cursor:pointer;border-bottom:1px solid var(--border);transition:background 0.15s}
 .user-list-item:last-child{border-bottom:none}
 .user-list-item:hover{background:var(--surface2)}
 .user-list-item.selected{background:var(--accent-glow)}
-.spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.6s linear infinite;flex-shrink:0}
+.spinner{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.6s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading-overlay{flex:1;display:flex;align-items:center;justify-content:center}
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
 input[type=file]{display:none}
-svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 </style>
 </head>
 <body>
 <div id="root"></div>
-
 <script>
-// ── CONFIG ──────────────────────────────────────────────────
-// Замените на URL вашего развёрнутого бэкенда (Railway / Render)
-const API_BASE = 'https://secure-share-production-5184.up.railway.app/';
+const API_BASE = 'https://your-backend.railway.app';
 // Для локальной разработки: const API_BASE = 'http://localhost:3000';
 
-// ── API HELPER ──────────────────────────────────────────────
 const api = {
   token: localStorage.getItem('ss_token'),
-  setToken(t){ this.token = t; if(t) localStorage.setItem('ss_token',t); else localStorage.removeItem('ss_token'); },
-
-  async req(method, path, body, isForm=false){
-    const headers = {};
-    if(this.token) headers['Authorization'] = 'Bearer ' + this.token;
-    if(!isForm) headers['Content-Type'] = 'application/json';
-    const res = await fetch(API_BASE + path, {
-      method,
-      headers,
-      body: isForm ? body : (body ? JSON.stringify(body) : undefined),
-    });
-    if(res.status === 401){ this.setToken(null); location.reload(); }
-    const data = await res.json().catch(()=>({}));
-    if(!res.ok) throw new Error(data.error || 'Ошибка сервера');
+  setToken(t){ this.token=t; if(t) localStorage.setItem('ss_token',t); else localStorage.removeItem('ss_token'); },
+  async req(method,path,body,isForm=false){
+    const h={};
+    if(this.token) h['Authorization']='Bearer '+this.token;
+    if(!isForm) h['Content-Type']='application/json';
+    const res=await fetch(API_BASE+path,{method,headers:h,body:isForm?body:(body?JSON.stringify(body):undefined)});
+    if(res.status===401){this.setToken(null);localStorage.removeItem('ss_session');location.reload();}
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok) throw new Error(data.error||'Ошибка сервера');
     return data;
   },
-  get(p){ return this.req('GET',p); },
-  post(p,b){ return this.req('POST',p,b); },
-  del(p){ return this.req('DELETE',p); },
-  upload(p,formData){ return this.req('POST',p,formData,true); },
-
-  fileUrl(uuid){ return `${API_BASE}/api/chats/file/${uuid}?token=${this.token}`; },
+  get(p){return this.req('GET',p);},
+  post(p,b){return this.req('POST',p,b);},
+  del(p){return this.req('DELETE',p);},
+  upload(p,fd){return this.req('POST',p,fd,true);},
 };
 
-// ── FILE HELPERS ────────────────────────────────────────────
-const FH = {
+const FH={
   icon(name){
     const ext=(name||'').split('.').pop().toLowerCase();
     const m={pdf:{t:'PDF',b:'#e74c3c22',c:'#e74c3c'},doc:{t:'DOC',b:'#2980b922',c:'#2980b9'},docx:{t:'DOC',b:'#2980b922',c:'#2980b9'},xls:{t:'XLS',b:'#27ae6022',c:'#27ae60'},xlsx:{t:'XLS',b:'#27ae6022',c:'#27ae60'},ppt:{t:'PPT',b:'#e67e2222',c:'#e67e22'},pptx:{t:'PPT',b:'#e67e2222',c:'#e67e22'},jpg:{t:'IMG',b:'#9b59b622',c:'#9b59b6'},jpeg:{t:'IMG',b:'#9b59b622',c:'#9b59b6'},png:{t:'IMG',b:'#9b59b622',c:'#9b59b6'},gif:{t:'GIF',b:'#9b59b622',c:'#9b59b6'},webp:{t:'IMG',b:'#9b59b622',c:'#9b59b6'},mp4:{t:'VID',b:'#1abc9c22',c:'#1abc9c'},mp3:{t:'AUD',b:'#1abc9c22',c:'#1abc9c'},wav:{t:'AUD',b:'#1abc9c22',c:'#1abc9c'},zip:{t:'ZIP',b:'#f39c1222',c:'#f39c12'},rar:{t:'RAR',b:'#f39c1222',c:'#f39c12'},txt:{t:'TXT',b:'#95a5a622',c:'#95a5a6'},js:{t:'JS',b:'#f1c40f22',c:'#f1c40f'},ts:{t:'TS',b:'#3498db22',c:'#3498db'},py:{t:'PY',b:'#3498db22',c:'#3498db'},json:{t:'JSON',b:'#2ecc7122',c:'#2ecc71'},html:{t:'HTML',b:'#e74c3c22',c:'#e74c3c'},css:{t:'CSS',b:'#3498db22',c:'#3498db'},csv:{t:'CSV',b:'#27ae6022',c:'#27ae60'}};
     return m[ext]||{t:'FILE',b:'#8b92a822',c:'#8b92a8'};
   },
-  size(b){ if(!b)return'—'; if(b<1024)return b+' B'; if(b<1048576)return(b/1024).toFixed(1)+' KB'; return(b/1048576).toFixed(1)+' MB'; },
-  date(ts){ return new Date(ts).toLocaleString('ru',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}); },
+  size(b){if(!b)return'—';if(b<1024)return b+' B';if(b<1048576)return(b/1024).toFixed(1)+' KB';return(b/1048576).toFixed(1)+' MB';},
+  date(ts){return new Date(ts).toLocaleString('ru',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});},
+  download(url,name,token){
+    fetch(url,{headers:{Authorization:'Bearer '+token}}).then(r=>r.blob()).then(b=>{
+      const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click();
+    });
+  },
 };
 </script>
-
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
 <script type="text/babel">
-const { useState, useEffect, useRef } = React;
+const {useState,useEffect,useRef,useCallback}=React;
 
-// ── SVG ICONS ────────────────────────────────────────────────
-const Ico = {
-  Shield: ()=><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
-  Chat:   ()=><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
-  Globe:  ()=><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
-  File:   ()=><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>,
-  Users:  ()=><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
-  Cog:    ()=><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>,
-  Plus:   ()=><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>,
-  Trash:  ()=><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>,
-  Out:    ()=><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>,
-  Clip:   ()=><svg viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>,
-  Check:  ()=><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>,
-  Search: ()=><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
-  Key:    ()=><svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>,
-  Dl:     ()=><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
-  Up:     ()=><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>,
-  Bld:    ()=><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+const Ico={
+  Shield:()=><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+  Chat:()=><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+  Globe:()=><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
+  File:()=><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>,
+  Users:()=><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+  Cog:()=><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>,
+  Plus:()=><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>,
+  Trash:()=><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>,
+  Out:()=><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>,
+  Clip:()=><svg viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>,
+  Check:()=><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>,
+  X:()=><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>,
+  Search:()=><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
+  Key:()=><svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>,
+  Dl:()=><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
+  Up:()=><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>,
+  Bld:()=><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+  Bell:()=><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>,
+  Mail:()=><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>,
+  Copy:()=><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>,
+  RefreshCw:()=><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>,
 };
 
-// ── AVATAR ───────────────────────────────────────────────────
 const AC=['#4f7cff','#7c5cfc','#2ecc71','#e74c3c','#f39c12','#1abc9c','#e91e63'];
 function ac(n){let h=0;for(const c of(n||'?'))h=((h<<5)-h)+c.charCodeAt(0);return AC[Math.abs(h)%AC.length];}
-function Av({name,size=34}){
+function Av({name,size=32}){
   const i=(name||'?').split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
-  return <div style={{width:size,height:size,borderRadius:'50%',background:ac(name),display:'flex',alignItems:'center',justifyContent:'center',fontSize:size*.36,fontWeight:600,color:'#fff',flexShrink:0}}>{i}</div>;
+  return <div style={{width:size,height:size,borderRadius:'50%',background:ac(name),display:'flex',alignItems:'center',justifyContent:'center',fontSize:size*.34,fontWeight:600,color:'#fff',flexShrink:0}}>{i}</div>;
 }
 
 // ── AUTH SCREEN ──────────────────────────────────────────────
 function AuthScreen({onLogin}){
+  // mode: login | register-org | register-employee
   const [mode,setMode]=useState('login');
-  const [tab,setTab]=useState('org');
-  const [f,setF]=useState({orgName:'',orgCode:'',name:'',email:'',password:''});
+  const [f,setF]=useState({name:'',email:'',password:'',orgName:''});
   const [err,setErr]=useState('');
+  const [ok,setOk]=useState('');
   const [loading,setLoading]=useState(false);
-  const s=k=>e=>setF(p=>({...p,[k]:e.target.value}));
+  const set=k=>e=>setF(p=>({...p,[k]:e.target.value}));
 
   async function submit(){
-    setErr('');setLoading(true);
+    setErr('');setOk('');setLoading(true);
     try{
       let data;
-      if(mode==='register'){
-        data=await api.post('/api/auth/register',{orgName:f.orgName,name:f.name,email:f.email,password:f.password});
-      } else if(tab==='org'){
+      if(mode==='login'){
         data=await api.post('/api/auth/login',{email:f.email,password:f.password});
+      } else if(mode==='register-org'){
+        data=await api.post('/api/auth/register-org',{orgName:f.orgName,name:f.name,email:f.email,password:f.password});
       } else {
-        data=await api.post('/api/auth/login-employee',{orgCode:f.orgCode,email:f.email,password:f.password});
+        data=await api.post('/api/auth/register-employee',{name:f.name,email:f.email,password:f.password});
       }
       api.setToken(data.token);
       onLogin(data);
@@ -267,42 +268,143 @@ function AuthScreen({onLogin}){
     setLoading(false);
   }
 
+  const go=m=>{setMode(m);setErr('');setOk('');};
+
   return(
     <div className="auth-wrap">
       <div className="auth-card">
         <div className="auth-logo">
-          <div className="auth-logo-icon"><Ico.Shield/></div>
+          <div className="auth-logo-icon" style={{width:38,height:38}}><Ico.Shield/></div>
           <div className="auth-logo-text">Secure<span>Share</span></div>
         </div>
-        {mode==='register'?(
-          <>
-            <div className="auth-title">Регистрация организации</div>
-            <div className="auth-subtitle">Создайте аккаунт и пригласите сотрудников</div>
-            {err&&<div className="error-msg">{err}</div>}
-            <div className="field"><label>Название организации</label><input placeholder="ООО «Пример»" value={f.orgName} onChange={s('orgName')}/></div>
-            <div className="field"><label>Ваше имя (администратор)</label><input placeholder="Иван Петров" value={f.name} onChange={s('name')}/></div>
-            <div className="field"><label>Email</label><input type="email" placeholder="admin@company.ru" value={f.email} onChange={s('email')}/></div>
-            <div className="field"><label>Пароль</label><input type="password" placeholder="Минимум 6 символов" value={f.password} onChange={s('password')}/></div>
-            <button className="btn btn-primary" onClick={submit} disabled={loading}>{loading?'Создание...':'Создать организацию'}</button>
-            <div className="auth-switch">Уже есть аккаунт? <a onClick={()=>{setMode('login');setErr('');}}>Войти</a></div>
-          </>
-        ):(
-          <>
-            <div className="auth-title">Добро пожаловать</div>
-            <div className="auth-subtitle">Войдите в свой аккаунт</div>
-            <div className="tabs">
-              <div className={`tab ${tab==='org'?'active':''}`} onClick={()=>setTab('org')}>Администратор</div>
-              <div className={`tab ${tab==='employee'?'active':''}`} onClick={()=>setTab('employee')}>Сотрудник</div>
-            </div>
-            {err&&<div className="error-msg">{err}</div>}
-            {tab==='employee'&&<div className="field"><label>Код организации</label><input placeholder="ORG12ABC" value={f.orgCode} onChange={s('orgCode')}/></div>}
-            <div className="field"><label>Email</label><input type="email" placeholder="user@company.ru" value={f.email} onChange={s('email')}/></div>
-            <div className="field"><label>Пароль</label><input type="password" placeholder="••••••••" value={f.password} onChange={s('password')}/></div>
-            <button className="btn btn-primary" onClick={submit} disabled={loading}>{loading?'Вход...':'Войти'}</button>
-            <div className="auth-switch">Нет организации? <a onClick={()=>{setMode('register');setErr('');}}>Зарегистрировать</a></div>
-          </>
-        )}
+
+        {mode==='login'&&<>
+          <div className="auth-title">Добро пожаловать</div>
+          <div className="auth-subtitle">Войдите в аккаунт организации или сотрудника</div>
+          {err&&<div className="error-msg">{err}</div>}
+          <div className="field"><label>Email</label><input type="email" placeholder="user@company.ru" value={f.email} onChange={set('email')}/></div>
+          <div className="field"><label>Пароль</label><input type="password" placeholder="••••••••" value={f.password} onChange={set('password')}/></div>
+          <button className="btn btn-primary" onClick={submit} disabled={loading}>{loading?'Вход...':'Войти'}</button>
+          <div className="auth-links">
+            <span>Нет аккаунта? <a onClick={()=>go('register-org')}>Зарегистрировать организацию</a></span>
+            <span>Сотрудник без аккаунта? <a onClick={()=>go('register-employee')}>Зарегистрироваться</a></span>
+          </div>
+        </>}
+
+        {mode==='register-org'&&<>
+          <div className="auth-title">Регистрация организации</div>
+          <div className="auth-subtitle">Вы станете администратором и сможете приглашать сотрудников</div>
+          {err&&<div className="error-msg">{err}</div>}
+          <div className="field"><label>Название организации</label><input placeholder="ООО «Пример»" value={f.orgName} onChange={set('orgName')}/></div>
+          <div className="field"><label>Ваше имя</label><input placeholder="Иван Петров" value={f.name} onChange={set('name')}/></div>
+          <div className="field"><label>Email</label><input type="email" placeholder="admin@company.ru" value={f.email} onChange={set('email')}/></div>
+          <div className="field"><label>Пароль</label><input type="password" placeholder="Минимум 6 символов" value={f.password} onChange={set('password')}/></div>
+          <button className="btn btn-primary" onClick={submit} disabled={loading}>{loading?'Создание...':'Создать организацию'}</button>
+          <div className="auth-links"><a onClick={()=>go('login')}>← Назад к входу</a></div>
+        </>}
+
+        {mode==='register-employee'&&<>
+          <div className="auth-title">Регистрация сотрудника</div>
+          <div className="auth-subtitle">Создайте аккаунт — вы получите личный код для приглашения в организацию</div>
+          {err&&<div className="error-msg">{err}</div>}
+          <div className="field"><label>Полное имя</label><input placeholder="Иван Петров" value={f.name} onChange={set('name')}/></div>
+          <div className="field"><label>Email</label><input type="email" placeholder="ivan@company.ru" value={f.email} onChange={set('email')}/></div>
+          <div className="field"><label>Пароль</label><input type="password" placeholder="Минимум 6 символов" value={f.password} onChange={set('password')}/></div>
+          <button className="btn btn-primary" onClick={submit} disabled={loading}>{loading?'Регистрация...':'Зарегистрироваться'}</button>
+          <div className="auth-links"><a onClick={()=>go('login')}>← Назад к входу</a></div>
+        </>}
       </div>
+    </div>
+  );
+}
+
+// ── PENDING SCREEN (сотрудник без организации) ───────────────
+function PendingScreen({session,onSessionUpdate,onLogout}){
+  const [invitations,setInvitations]=useState([]);
+  const [loading,setLoading]=useState(true);
+  const [copied,setCopied]=useState(false);
+  const code=session.user.inviteCode||'—';
+
+  useEffect(()=>{
+    load();
+    const t=setInterval(load,10000); // опрашиваем каждые 10 сек
+    return()=>clearInterval(t);
+  },[]);
+
+  async function load(){
+    try{ setInvitations(await api.get('/api/invitations/incoming')); }
+    catch{}
+    setLoading(false);
+  }
+
+  async function accept(id){
+    try{
+      await api.post(`/api/invitations/${id}/accept`,{});
+      // Обновляем токен и сессию — теперь у пользователя есть org_id
+      const data=await api.get('/api/auth/me');
+      api.setToken(data.token);
+      onSessionUpdate(data);
+    }catch(e){alert(e.message);}
+  }
+
+  async function reject(id){
+    try{ await api.post(`/api/invitations/${id}/reject`,{}); load(); }
+    catch(e){alert(e.message);}
+  }
+
+  function copyCode(){
+    navigator.clipboard.writeText(code).then(()=>{setCopied(true);setTimeout(()=>setCopied(false),2000);});
+  }
+
+  return(
+    <div className="pending-screen">
+      <div style={{width:56,height:56,borderRadius:16,background:'linear-gradient(135deg,var(--accent),var(--accent2))',display:'flex',alignItems:'center',justifyContent:'center'}}>
+        <Ico.Mail/>
+      </div>
+      <h2>Добро пожаловать, {session.user.name}!</h2>
+      <p>Вы зарегистрированы как сотрудник. Передайте ваш личный код администратору нужной организации — он отправит вам приглашение.</p>
+
+      <div className="invite-code-box" style={{width:'100%',maxWidth:380}}>
+        <div className="label">Ваш личный код</div>
+        <div className="code">{code}</div>
+        <div className="hint">Сообщите этот код администратору организации</div>
+        <button className="btn btn-secondary btn-sm" style={{marginTop:12}} onClick={copyCode}>
+          <Ico.Copy/> {copied?'Скопировано!':'Копировать'}
+        </button>
+      </div>
+
+      {loading?<div className="spinner" style={{width:24,height:24}}/>:<>
+        {invitations.length>0&&<>
+          <div style={{fontFamily:"'Syne',sans-serif",fontSize:16,fontWeight:600,alignSelf:'flex-start',width:'100%',maxWidth:480}}>
+            Входящие приглашения ({invitations.length})
+          </div>
+          <div className="inv-list">
+            {invitations.map(inv=>(
+              <div key={inv.id} className="inv-card">
+                <div className="inv-card-info">
+                  <div className="inv-card-org">{inv.org_name}</div>
+                  <div className="inv-card-date">{FH.date(inv.created_at)}</div>
+                </div>
+                <div className="inv-card-actions">
+                  <button className="btn btn-success btn-sm" onClick={()=>accept(inv.id)}><Ico.Check/> Принять</button>
+                  <button className="btn btn-danger btn-sm" onClick={()=>reject(inv.id)}><Ico.X/> Отклонить</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>}
+        {invitations.length===0&&(
+          <div style={{display:'flex',alignItems:'center',gap:8,color:'var(--text3)',fontSize:13}}>
+            <div className="spinner"/>
+            <span>Ожидание приглашения...</span>
+            <button className="btn btn-secondary btn-sm" onClick={load} style={{marginLeft:4}}><Ico.RefreshCw/></button>
+          </div>
+        )}
+      </>}
+
+      <button className="btn btn-secondary btn-sm" onClick={onLogout} style={{marginTop:8}}>
+        <Ico.Out/> Выйти
+      </button>
     </div>
   );
 }
@@ -316,39 +418,31 @@ function ChatView({session,isInterOrg}){
   const [uploading,setUploading]=useState(false);
   const endRef=useRef(null);
 
-  useEffect(()=>{ loadChats(); },[isInterOrg]);
-  useEffect(()=>{ if(active) loadMessages(active.id); },[active]);
-  useEffect(()=>{ endRef.current?.scrollIntoView({behavior:'smooth'}); },[messages]);
+  useEffect(()=>{loadChats();},[isInterOrg]);
+  useEffect(()=>{if(active)loadMsgs(active.id);},[active]);
+  useEffect(()=>{endRef.current?.scrollIntoView({behavior:'smooth'});},[messages]);
 
-  async function loadChats(){
-    setChats(null);setActive(null);setMessages([]);
-    try{ setChats(await api.get(`/api/chats?interOrg=${isInterOrg}`)); }
-    catch(e){ setChats([]); }
-  }
+  async function loadChats(){setChats(null);setActive(null);setMessages([]);try{setChats(await api.get(`/api/chats?interOrg=${isInterOrg}`));}catch{setChats([]);}}
+  async function loadMsgs(id){try{setMessages(await api.get(`/api/chats/${id}/messages`));}catch{setMessages([]);}}
 
-  async function loadMessages(chatId){
-    try{ setMessages(await api.get(`/api/chats/${chatId}/messages`)); }
-    catch{ setMessages([]); }
-  }
-
-  function getChatName(chat){
-    const other=chat.members?.find(m=>m.userId!==session.user.id);
-    if(!other) return 'Чат';
-    return isInterOrg ? `${other.name} (${other.orgName})` : other.name;
+  function chatName(c){
+    const o=c.members?.find(m=>m.userId!==session.user.id);
+    if(!o)return'Чат';
+    return isInterOrg?`${o.name} (${o.orgName})`:o.name;
   }
 
   async function sendFile(file){
-    if(!active) return;
+    if(!active)return;
     setUploading(true);
     try{
-      const fd=new FormData(); fd.append('file',file);
+      const fd=new FormData();fd.append('file',file);
       const msg=await api.upload(`/api/chats/${active.id}/upload`,fd);
-      setMessages(prev=>[...prev,msg]);
+      setMessages(p=>[...p,msg]);
     }catch(e){alert(e.message);}
     setUploading(false);
   }
 
-  if(chats===null) return <div className="loading-overlay"><div className="spinner"/></div>;
+  if(chats===null)return<div className="loading-overlay"><div className="spinner"/></div>;
 
   return(
     <div className="chat-layout">
@@ -359,58 +453,45 @@ function ChatView({session,isInterOrg}){
         </div>
         <div className="chat-list-body">
           {chats.length===0
-            ?<div className="empty-state" style={{padding:'30px 16px'}}><Ico.Chat/><p>Нет чатов. Создайте первый!</p></div>
+            ?<div className="empty-state" style={{padding:'24px 12px'}}><Ico.Chat/><p>Нет чатов</p></div>
             :chats.map(c=>(
               <div key={c.id} className={`chat-item ${active?.id===c.id?'active':''}`} onClick={()=>setActive(c)}>
-                <div className="chat-item-name">{getChatName(c)}</div>
-                <div className="chat-item-meta">Открыт {FH.date(c.created_at)}</div>
+                <div className="chat-item-name">{chatName(c)}</div>
+                <div className="chat-item-meta">{FH.date(c.created_at)}</div>
               </div>
             ))
           }
         </div>
         <div className="new-chat-btn-row">
-          <button className="btn btn-secondary" style={{width:'100%'}} onClick={()=>setShowNew(true)}><Ico.Plus/> Новый чат</button>
+          <button className="btn btn-secondary" style={{width:'100%',fontSize:13}} onClick={()=>setShowNew(true)}><Ico.Plus/> Новый чат</button>
         </div>
       </div>
 
       {active?(
         <div className="chat-panel">
           <div className="chat-header">
-            <Av name={getChatName(active)} size={36}/>
+            <Av name={chatName(active)} size={34}/>
             <div style={{flex:1}}>
-              <div className="chat-header-name">{getChatName(active)}</div>
-              <div style={{fontSize:12,color:'var(--text2)'}}>
-                <span className="chip chip-green" style={{fontSize:10}}><Ico.Shield/> Защищённый канал · JWT + bcrypt</span>
-              </div>
+              <div style={{fontFamily:"'Syne',sans-serif",fontSize:14,fontWeight:600}}>{chatName(active)}</div>
+              <span className="chip chip-green" style={{fontSize:10,marginTop:2}}><Ico.Shield/> Защищённый канал</span>
             </div>
           </div>
           <div className="chat-messages">
             {messages.length===0
-              ?<div className="chat-empty"><Ico.Clip/><span style={{fontSize:14}}>Файлов ещё нет. Отправьте первый!</span></div>
+              ?<div className="chat-empty"><Ico.Clip/><span style={{fontSize:13}}>Отправьте первый файл</span></div>
               :messages.map(m=>{
-                const isOwn=m.sender_id===session.user.id;
+                const own=m.sender_id===session.user.id;
                 const fi=FH.icon(m.file_name);
-                const dlUrl=`${API_BASE}/api/chats/file/${m.file_uuid}`;
                 return(
-                  <div key={m.id} className={`msg ${isOwn?'own':''}`}>
+                  <div key={m.id} className={`msg ${own?'own':''}`}>
                     <div className="msg-ava" style={{background:ac(m.sender_name||'?'),color:'#fff'}}>{(m.sender_name||'?')[0].toUpperCase()}</div>
                     <div className="msg-bubble">
-                      <div className="msg-sender">{m.sender_name||'Неизвестный'}</div>
-                      <a className="file-card" href={dlUrl} target="_blank" rel="noreferrer"
-                        onClick={e=>{e.preventDefault();
-                          fetch(dlUrl,{headers:{Authorization:'Bearer '+api.token}})
-                            .then(r=>r.blob()).then(b=>{
-                              const a=document.createElement('a');
-                              a.href=URL.createObjectURL(b);a.download=m.file_name;a.click();
-                            });
-                        }}>
+                      <div className="msg-sender">{m.sender_name||'—'}</div>
+                      <div className="file-card" onClick={()=>FH.download(`${API_BASE}/api/chats/file/${m.file_uuid}`,m.file_name,api.token)}>
                         <div className="file-icon" style={{background:fi.b,color:fi.c}}>{fi.t}</div>
-                        <div className="file-info">
-                          <div className="file-name">{m.file_name}</div>
-                          <div className="file-size">{FH.size(m.file_size)}</div>
-                        </div>
+                        <div className="file-info"><div className="file-name">{m.file_name}</div><div className="file-size">{FH.size(m.file_size)}</div></div>
                         <Ico.Dl/>
-                      </a>
+                      </div>
                       <div className="msg-time">{FH.date(m.created_at)}</div>
                     </div>
                   </div>
@@ -422,18 +503,17 @@ function ChatView({session,isInterOrg}){
           <div className="chat-input-area">
             <div className={`chat-input-row ${uploading?'uploading':''}`}>
               {uploading
-                ?<><div className="spinner"/><span style={{fontSize:13,color:'var(--text2)'}}>Загрузка файла...</span></>
-                :<>
-                  <span className="chat-input-placeholder">Прикрепите файл для отправки...</span>
-                  <label className="file-attach-btn" htmlFor={`cf-${isInterOrg}`}><Ico.Clip/> Прикрепить файл</label>
-                  <input type="file" id={`cf-${isInterOrg}`} onChange={e=>{if(e.target.files[0])sendFile(e.target.files[0]);e.target.value='';}}/>
+                ?<><div className="spinner"/><span style={{fontSize:13,color:'var(--text2)',marginLeft:6}}>Загрузка...</span></>
+                :<><span className="chat-input-placeholder">Прикрепите файл...</span>
+                  <label className="file-attach-btn" htmlFor={`cf${isInterOrg}`}><Ico.Clip/> Прикрепить файл</label>
+                  <input type="file" id={`cf${isInterOrg}`} onChange={e=>{if(e.target.files[0])sendFile(e.target.files[0]);e.target.value='';}}/>
                 </>
               }
             </div>
           </div>
         </div>
       ):(
-        <div className="no-chat-selected"><Ico.Chat/><span style={{fontSize:14}}>Выберите чат или создайте новый</span></div>
+        <div className="no-chat-selected"><Ico.Chat/><span style={{fontSize:13}}>Выберите чат или создайте новый</span></div>
       )}
 
       {showNew&&<NewChatModal session={session} isInterOrg={isInterOrg}
@@ -454,20 +534,15 @@ function NewChatModal({session,isInterOrg,onClose,onCreated}){
   useEffect(()=>{
     clearTimeout(timer.current);
     timer.current=setTimeout(async()=>{
-      try{
-        const res=await api.get(`/api/chats/users/search?${isInterOrg?'':'orgId='+session.org.id}&q=${encodeURIComponent(q)}`);
-        setUsers(res);
-      }catch{}
+      try{setUsers(await api.get(`/api/chats/users/search?${isInterOrg?'':'orgId='+session.org.id}&q=${encodeURIComponent(q)}`));}catch{}
     },300);
   },[q]);
 
   async function create(){
-    if(!sel) return setErr('Выберите пользователя');
+    if(!sel)return setErr('Выберите пользователя');
     setLoading(true);
-    try{
-      await api.post('/api/chats',{targetUserId:sel.id,isInterOrg});
-      onCreated();
-    }catch(e){setErr(e.message);}
+    try{await api.post('/api/chats',{targetUserId:sel.id,isInterOrg});onCreated();}
+    catch(e){setErr(e.message);}
     setLoading(false);
   }
 
@@ -475,15 +550,15 @@ function NewChatModal({session,isInterOrg,onClose,onCreated}){
     <div className="modal-overlay" onClick={e=>e.target===e.currentTarget&&onClose()}>
       <div className="modal">
         <div className="modal-title">{isInterOrg?'Чат с другой организацией':'Новый чат'}</div>
-        <div className="modal-sub">{isInterOrg?'Найдите сотрудника другой организации':'Выберите сотрудника вашей организации'}</div>
+        <div className="modal-sub">{isInterOrg?'Поиск по сотрудникам других организаций':'Сотрудники вашей организации'}</div>
         {err&&<div className="error-msg">{err}</div>}
-        <div className="search-box"><Ico.Search/><input placeholder="Поиск..." value={q} onChange={e=>setQ(e.target.value)}/></div>
+        <div className="search-box"><Ico.Search/><input placeholder="Имя или email..." value={q} onChange={e=>setQ(e.target.value)}/></div>
         <div className="user-list">
           {users.length===0
-            ?<div style={{padding:20,textAlign:'center',color:'var(--text3)',fontSize:13}}>Начните вводить имя или email</div>
+            ?<div style={{padding:18,textAlign:'center',color:'var(--text3)',fontSize:13}}>Начните вводить для поиска</div>
             :users.map(u=>(
               <div key={u.id} className={`user-list-item ${sel?.id===u.id?'selected':''}`} onClick={()=>setSel(u)}>
-                <Av name={u.name} size={30}/>
+                <Av name={u.name} size={28}/>
                 <div style={{flex:1,minWidth:0}}>
                   <div style={{fontSize:13,fontWeight:500}}>{u.name}</div>
                   <div style={{fontSize:11,color:'var(--text2)'}}>{isInterOrg?u.org_name:u.email}</div>
@@ -494,8 +569,8 @@ function NewChatModal({session,isInterOrg,onClose,onCreated}){
           }
         </div>
         <div className="modal-footer">
-          <button className="btn btn-secondary" onClick={onClose}>Отмена</button>
-          <button className="btn btn-primary" style={{width:'auto'}} onClick={create} disabled={loading}>{loading?'Создание...':'Открыть чат'}</button>
+          <button className="btn btn-secondary btn-sm" onClick={onClose}>Отмена</button>
+          <button className="btn btn-primary" style={{width:'auto'}} onClick={create} disabled={loading}>{loading?'...':'Открыть чат'}</button>
         </div>
       </div>
     </div>
@@ -508,62 +583,50 @@ function OrgFiles({session}){
   const [uploading,setUploading]=useState(false);
   const isAdmin=session.user.role==='admin';
 
-  useEffect(()=>{ api.get('/api/org-files').then(setFiles).catch(()=>setFiles([])); },[]);
+  useEffect(()=>{api.get('/api/org-files').then(setFiles).catch(()=>setFiles([]));},[]);
 
   async function upload(file){
     setUploading(true);
-    try{
-      const fd=new FormData(); fd.append('file',file);
-      const f=await api.upload('/api/org-files',fd);
-      setFiles(p=>[f,...p]);
-    }catch(e){alert(e.message);}
+    try{const fd=new FormData();fd.append('file',file);setFiles(p=>[await api.upload('/api/org-files',fd),...p]);}
+    catch(e){alert(e.message);}
     setUploading(false);
   }
 
   async function del(id){
-    if(!confirm('Удалить файл?')) return;
-    try{ await api.del(`/api/org-files/${id}`); setFiles(p=>p.filter(f=>f.id!==id)); }
-    catch(e){ alert(e.message); }
+    if(!confirm('Удалить файл?'))return;
+    try{await api.del(`/api/org-files/${id}`);setFiles(p=>p.filter(f=>f.id!==id));}
+    catch(e){alert(e.message);}
   }
 
-  if(files===null) return <div className="loading-overlay"><div className="spinner"/></div>;
+  if(files===null)return<div className="loading-overlay"><div className="spinner"/></div>;
 
   return(
     <div style={{flex:1,display:'flex',flexDirection:'column',overflow:'hidden'}}>
       <div className="main-header">
-        <div>
-          <div className="main-title">Файлы организации</div>
-          <div className="main-subtitle">Общие документы · {session.org.name}</div>
-        </div>
-        {isAdmin&&<label className="btn btn-primary" style={{width:'auto',cursor:'pointer'}} htmlFor="of-input"><Ico.Up/> Загрузить</label>}
-        <input type="file" id="of-input" onChange={e=>{if(e.target.files[0])upload(e.target.files[0]);e.target.value='';}}/>
+        <div><div className="main-title">Файлы организации</div><div className="main-subtitle">Общие документы · {session.org.name}</div></div>
+        {isAdmin&&<label className="btn btn-primary" style={{width:'auto',cursor:'pointer'}} htmlFor="of-inp"><Ico.Up/> Загрузить</label>}
+        <input type="file" id="of-inp" onChange={e=>{if(e.target.files[0])upload(e.target.files[0]);e.target.value='';}}/>
       </div>
       <div className="main-body">
         {!isAdmin&&<div className="alert alert-green"><Ico.Shield/> Файлы публикует администратор. Вы можете их скачивать.</div>}
-        {isAdmin&&(
-          <label className="upload-drop" htmlFor="of-input">
-            {uploading?<><div className="spinner" style={{margin:'0 auto 10px'}}/><p>Загрузка...</p></>:<><Ico.Up/><p>Перетащите файл или нажмите для выбора</p><span>PDF, Word, Excel, изображения и другие форматы · до 50 МБ</span></>}
-          </label>
-        )}
-        {files.length===0
-          ?<div className="empty-state"><Ico.File/><p>Файлов организации пока нет</p></div>
+        {isAdmin&&<label className="upload-drop" htmlFor="of-inp">
+          {uploading?<><div className="spinner" style={{margin:'0 auto 8px'}}/><p>Загрузка...</p></>
+            :<><Ico.Up/><p>Перетащите файл или нажмите</p><span>До 50 МБ · любые форматы</span></>}
+        </label>}
+        {files.length===0?<div className="empty-state"><Ico.File/><p>Файлов организации пока нет</p></div>
           :<div className="org-files-grid">
             {files.map(f=>{
               const fi=FH.icon(f.name);
-              const dlUrl=`${API_BASE}/api/chats/file/${f.file_uuid}`;
               return(
                 <div key={f.id} className="org-file-card">
-                  <div className="file-icon" style={{background:fi.b,color:fi.c,width:44,height:44,borderRadius:10,fontSize:13}}>{fi.t}</div>
+                  <div className="file-icon" style={{background:fi.b,color:fi.c,width:40,height:40,borderRadius:9,fontSize:11}}>{fi.t}</div>
                   <div>
                     <div style={{fontSize:13,fontWeight:500,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{f.name}</div>
                     <div style={{fontSize:11,color:'var(--text2)',marginTop:2}}>{FH.size(f.size)} · {FH.date(f.created_at)}</div>
-                    <div style={{fontSize:11,color:'var(--text2)',marginTop:2}}>Загрузил: {f.uploader_name||'—'}</div>
+                    <div style={{fontSize:11,color:'var(--text2)'}}>{f.uploader_name||'—'}</div>
                   </div>
                   <div className="org-file-actions">
-                    <button className="btn btn-secondary btn-sm" style={{flex:1}} onClick={()=>{
-                      fetch(dlUrl,{headers:{Authorization:'Bearer '+api.token}})
-                        .then(r=>r.blob()).then(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=f.name;a.click();});
-                    }}><Ico.Dl/> Скачать</button>
+                    <button className="btn btn-secondary btn-sm" style={{flex:1}} onClick={()=>FH.download(`${API_BASE}/api/chats/file/${f.file_uuid}`,f.name,api.token)}><Ico.Dl/> Скачать</button>
                     {isAdmin&&<button className="btn btn-danger btn-sm btn-icon" onClick={()=>del(f.id)}><Ico.Trash/></button>}
                   </div>
                 </div>
@@ -576,43 +639,85 @@ function OrgFiles({session}){
   );
 }
 
-// ── EMPLOYEES ────────────────────────────────────────────────
+// ── EMPLOYEES + INVITATIONS ───────────────────────────────────
 function Employees({session}){
   const [emps,setEmps]=useState(null);
-  const [showAdd,setShowAdd]=useState(false);
+  const [invSent,setInvSent]=useState([]);
+  const [showInvite,setShowInvite]=useState(false);
+  const [invCode,setInvCode]=useState('');
+  const [invErr,setInvErr]=useState('');
+  const [invOk,setInvOk]=useState('');
+  const [invLoading,setInvLoading]=useState(false);
   const isAdmin=session.user.role==='admin';
 
-  useEffect(()=>{ api.get('/api/org/employees').then(setEmps).catch(()=>setEmps([])); },[]);
+  useEffect(()=>{
+    api.get('/api/org/employees').then(setEmps).catch(()=>setEmps([]));
+    if(isAdmin) api.get('/api/invitations/sent').then(setInvSent).catch(()=>{});
+  },[]);
 
   async function del(id){
-    if(!confirm('Удалить сотрудника?')) return;
-    try{ await api.del(`/api/org/employees/${id}`); setEmps(p=>p.filter(e=>e.id!==id)); }
-    catch(e){ alert(e.message); }
+    if(!confirm('Удалить сотрудника?'))return;
+    try{await api.del(`/api/org/employees/${id}`);setEmps(p=>p.filter(e=>e.id!==id));}
+    catch(e){alert(e.message);}
   }
 
-  if(emps===null) return <div className="loading-overlay"><div className="spinner"/></div>;
+  async function sendInvite(){
+    setInvErr('');setInvOk('');setInvLoading(true);
+    try{
+      const r=await api.post('/api/invitations/send',{inviteCode:invCode.trim()});
+      setInvOk(`Приглашение отправлено: ${r.user.name} (${r.user.email})`);
+      setInvCode('');
+      const sent=await api.get('/api/invitations/sent');
+      setInvSent(sent);
+    }catch(e){setInvErr(e.message);}
+    setInvLoading(false);
+  }
+
+  if(emps===null)return<div className="loading-overlay"><div className="spinner"/></div>;
 
   return(
     <div style={{flex:1,display:'flex',flexDirection:'column',overflow:'hidden'}}>
       <div className="main-header">
-        <div>
-          <div className="main-title">Сотрудники</div>
-          <div className="main-subtitle">{session.org.name}</div>
-        </div>
-        {isAdmin&&<button className="btn btn-primary" style={{width:'auto'}} onClick={()=>setShowAdd(true)}><Ico.Plus/> Добавить</button>}
+        <div><div className="main-title">Сотрудники</div><div className="main-subtitle">{session.org.name}</div></div>
+        {isAdmin&&<button className="btn btn-primary" style={{width:'auto'}} onClick={()=>setShowInvite(p=>!p)}><Ico.Mail/> Пригласить</button>}
       </div>
       <div className="main-body">
-        <div className="alert alert-green">
-          <Ico.Key/>
-          Код организации для входа сотрудников: <b style={{color:'var(--green)',marginLeft:6,fontFamily:'monospace',fontSize:15}}>{session.org.code}</b>
-        </div>
+
+        {isAdmin&&showInvite&&(
+          <div className="settings-section" style={{marginBottom:18}}>
+            <div className="settings-section-title"><Ico.Key/> Пригласить сотрудника по личному коду</div>
+            <p style={{fontSize:13,color:'var(--text2)',marginBottom:12}}>Сотрудник должен зарегистрироваться на сайте и сообщить вам свой личный код (начинается с EMP).</p>
+            {invErr&&<div className="error-msg">{invErr}</div>}
+            {invOk&&<div className="success-msg"><Ico.Check/> {invOk}</div>}
+            <div style={{display:'flex',gap:8}}>
+              <input style={{flex:1,background:'var(--surface2)',border:'1px solid var(--border)',borderRadius:'var(--radius-sm)',padding:'10px 14px',color:'var(--text)',fontSize:14,fontFamily:"'DM Sans',sans-serif",outline:'none'}}
+                placeholder="EMPXXXXX" value={invCode} onChange={e=>setInvCode(e.target.value.toUpperCase())}
+                onKeyDown={e=>e.key==='Enter'&&sendInvite()}/>
+              <button className="btn btn-primary" style={{width:'auto'}} onClick={sendInvite} disabled={invLoading||!invCode}>
+                {invLoading?'...':'Отправить'}
+              </button>
+            </div>
+            {invSent.length>0&&<>
+              <div style={{fontSize:12,color:'var(--text3)',marginTop:14,marginBottom:8,textTransform:'uppercase',letterSpacing:'0.5px'}}>Отправленные приглашения</div>
+              {invSent.map(i=>(
+                <div key={i.id} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'8px 0',borderBottom:'1px solid var(--border)',fontSize:13}}>
+                  <span>{i.user_name} <span style={{color:'var(--text2)',fontSize:11}}>({i.email})</span></span>
+                  <span className={`chip ${i.status==='accepted'?'chip-green':i.status==='rejected'?'chip-red':'chip-amber'}`}>
+                    {i.status==='accepted'?'Принято':i.status==='rejected'?'Отклонено':'Ожидание'}
+                  </span>
+                </div>
+              ))}
+            </>}
+          </div>
+        )}
+
         <div className="employees-grid">
           {emps.map(u=>(
             <div key={u.id} className="employee-card">
-              <div style={{display:'flex',alignItems:'center',gap:12}}>
-                <Av name={u.name} size={40}/>
+              <div style={{display:'flex',alignItems:'center',gap:10}}>
+                <Av name={u.name} size={38}/>
                 <div style={{flex:1,minWidth:0}}>
-                  <div style={{fontSize:14,fontWeight:500}}>{u.name}{u.id===session.user.id&&<span style={{fontSize:11,color:'var(--text3)',marginLeft:6}}>(вы)</span>}</div>
+                  <div style={{fontSize:14,fontWeight:500}}>{u.name}{u.id===session.user.id&&<span style={{fontSize:11,color:'var(--text3)',marginLeft:5}}>(вы)</span>}</div>
                   <div style={{fontSize:12,color:'var(--text2)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{u.email}</div>
                 </div>
               </div>
@@ -624,36 +729,6 @@ function Employees({session}){
           ))}
         </div>
       </div>
-      {showAdd&&<AddEmpModal session={session} onClose={()=>setShowAdd(false)} onAdded={u=>{setEmps(p=>[...p,u]);setShowAdd(false);}}/>}
-    </div>
-  );
-}
-
-function AddEmpModal({session,onClose,onAdded}){
-  const [f,setF]=useState({name:'',email:'',password:''});
-  const [err,setErr]=useState('');
-  const [loading,setLoading]=useState(false);
-  const s=k=>e=>setF(p=>({...p,[k]:e.target.value}));
-  async function add(){
-    setLoading(true);setErr('');
-    try{ const u=await api.post('/api/org/employees',f); onAdded(u); }
-    catch(e){ setErr(e.message); }
-    setLoading(false);
-  }
-  return(
-    <div className="modal-overlay" onClick={e=>e.target===e.currentTarget&&onClose()}>
-      <div className="modal">
-        <div className="modal-title">Добавить сотрудника</div>
-        <div className="modal-sub">Сотрудник сможет войти с кодом организации <b style={{color:'var(--accent)'}}>{session.org.code}</b></div>
-        {err&&<div className="error-msg">{err}</div>}
-        <div className="field"><label>Полное имя</label><input placeholder="Иван Иванов" value={f.name} onChange={s('name')}/></div>
-        <div className="field"><label>Email</label><input type="email" placeholder="ivan@company.ru" value={f.email} onChange={s('email')}/></div>
-        <div className="field"><label>Пароль</label><input type="password" placeholder="Временный пароль" value={f.password} onChange={s('password')}/></div>
-        <div className="modal-footer">
-          <button className="btn btn-secondary" onClick={onClose}>Отмена</button>
-          <button className="btn btn-primary" style={{width:'auto'}} onClick={add} disabled={loading}>{loading?'Добавление...':'Добавить'}</button>
-        </div>
-      </div>
     </div>
   );
 }
@@ -663,53 +738,63 @@ function Settings({session,onDeleteOrg}){
   const isAdmin=session.user.role==='admin';
   const [confirm,setConfirm]=useState(false);
   const [loading,setLoading]=useState(false);
+  const [copied,setCopied]=useState(false);
 
   async function deleteOrg(){
     setLoading(true);
-    try{ await api.del('/api/org'); api.setToken(null); onDeleteOrg(); }
-    catch(e){ alert(e.message); }
+    try{await api.del('/api/org');api.setToken(null);onDeleteOrg();}
+    catch(e){alert(e.message);}
     setLoading(false);
+  }
+
+  function copyCode(){
+    const c=session.user.inviteCode;
+    if(!c)return;
+    navigator.clipboard.writeText(c).then(()=>{setCopied(true);setTimeout(()=>setCopied(false),2000);});
   }
 
   return(
     <div style={{flex:1,display:'flex',flexDirection:'column',overflow:'hidden'}}>
-      <div className="main-header">
-        <div><div className="main-title">Настройки</div><div className="main-subtitle">Управление организацией и аккаунтом</div></div>
-      </div>
+      <div className="main-header"><div><div className="main-title">Настройки</div><div className="main-subtitle">Организация и аккаунт</div></div></div>
       <div className="main-body">
-        <div className="settings-section">
+        {session.org&&<div className="settings-section">
           <div className="settings-section-title"><Ico.Bld/> Организация</div>
           <div className="settings-row"><span>Название</span><span style={{color:'var(--text2)'}}>{session.org.name}</span></div>
-          <div className="settings-row"><span>Код для сотрудников</span><span style={{fontFamily:'monospace',color:'var(--accent)',fontWeight:600}}>{session.org.code}</span></div>
-        </div>
+          <div className="settings-row"><span>Код организации</span><span style={{fontFamily:'monospace',color:'var(--accent)',fontWeight:600}}>{session.org.code}</span></div>
+        </div>}
         <div className="settings-section">
           <div className="settings-section-title"><Ico.Users/> Профиль</div>
           <div className="settings-row"><span>Имя</span><span style={{color:'var(--text2)'}}>{session.user.name}</span></div>
           <div className="settings-row"><span>Email</span><span style={{color:'var(--text2)'}}>{session.user.email}</span></div>
           <div className="settings-row"><span>Роль</span><span className={`chip ${session.user.role==='admin'?'chip-blue':'chip-green'}`}>{session.user.role==='admin'?'Администратор':'Сотрудник'}</span></div>
+          {session.user.inviteCode&&<div className="settings-row">
+            <span>Личный код</span>
+            <div style={{display:'flex',alignItems:'center',gap:8}}>
+              <span style={{fontFamily:'monospace',color:'var(--accent)',fontWeight:600}}>{session.user.inviteCode}</span>
+              <button className="btn btn-secondary btn-sm" onClick={copyCode}><Ico.Copy/>{copied?' Скопировано':''}</button>
+            </div>
+          </div>}
         </div>
         <div className="settings-section">
           <div className="settings-section-title"><Ico.Shield/> Безопасность</div>
-          <div className="settings-row"><span>Хэширование паролей</span><span className="chip chip-green">bcrypt (cost 10)</span></div>
-          <div className="settings-row"><span>Аутентификация</span><span className="chip chip-blue">JWT · 7 дней</span></div>
-          <div className="settings-row"><span>Хранение файлов</span><span className="chip chip-blue">UUID-имена · PostgreSQL</span></div>
-          <div className="settings-row"><span>Контроль доступа</span><span className="chip chip-green">RBAC (admin / employee)</span></div>
+          <div className="settings-row"><span>Пароли</span><span className="chip chip-green">bcrypt (cost 10)</span></div>
+          <div className="settings-row"><span>Токены</span><span className="chip chip-blue">JWT · 7 дней</span></div>
+          <div className="settings-row"><span>Файлы на диске</span><span className="chip chip-blue">UUID-именование</span></div>
+          <div className="settings-row"><span>Доступ</span><span className="chip chip-green">RBAC + приглашения</span></div>
           <div className="settings-row"><span>Транспорт</span><span className="chip chip-green">HTTPS + CORS</span></div>
         </div>
-        {isAdmin&&(
-          <div className="settings-section" style={{borderColor:'rgba(231,76,60,0.3)'}}>
-            <div className="settings-section-title" style={{color:'var(--red)'}}><Ico.Trash/> Опасная зона</div>
-            <p style={{fontSize:13,color:'var(--text2)',marginBottom:14}}>Удаление организации безвозвратно удалит всех сотрудников, внутренние чаты и общие файлы. Файлы в межорг. чатах останутся у другой стороны.</p>
-            {!confirm
-              ?<button className="btn btn-danger" onClick={()=>setConfirm(true)}>Удалить организацию</button>
-              :<div style={{display:'flex',gap:10,alignItems:'center'}}>
-                <span style={{fontSize:13,color:'var(--red)'}}>Вы уверены? Необратимо.</span>
-                <button className="btn btn-danger" onClick={deleteOrg} disabled={loading}>{loading?'Удаление...':'Да, удалить'}</button>
-                <button className="btn btn-secondary btn-sm" onClick={()=>setConfirm(false)}>Отмена</button>
-              </div>
-            }
-          </div>
-        )}
+        {isAdmin&&<div className="settings-section" style={{borderColor:'rgba(231,76,60,0.3)'}}>
+          <div className="settings-section-title" style={{color:'var(--red)'}}><Ico.Trash/> Опасная зона</div>
+          <p style={{fontSize:13,color:'var(--text2)',marginBottom:12}}>Удаление организации безвозвратно удалит всех сотрудников, файлы и внутренние чаты. Файлы в межорг. чатах останутся.</p>
+          {!confirm
+            ?<button className="btn btn-danger" onClick={()=>setConfirm(true)}>Удалить организацию</button>
+            :<div style={{display:'flex',gap:8,alignItems:'center'}}>
+              <span style={{fontSize:13,color:'var(--red)'}}>Необратимо. Уверены?</span>
+              <button className="btn btn-danger" onClick={deleteOrg} disabled={loading}>{loading?'...':'Да, удалить'}</button>
+              <button className="btn btn-secondary btn-sm" onClick={()=>setConfirm(false)}>Отмена</button>
+            </div>
+          }
+        </div>}
       </div>
     </div>
   );
@@ -718,26 +803,44 @@ function Settings({session,onDeleteOrg}){
 // ── APP ROOT ─────────────────────────────────────────────────
 function App(){
   const [session,setSession]=useState(()=>{
-    // Восстанавливаем сессию из localStorage
     const token=localStorage.getItem('ss_token');
     const raw=localStorage.getItem('ss_session');
-    if(!token||!raw) return null;
-    try{ return JSON.parse(raw); }catch{ return null; }
+    if(!token||!raw)return null;
+    try{return JSON.parse(raw);}catch{return null;}
   });
   const [section,setSection]=useState('chats');
 
-  function onLogin(data){
+  function saveSession(data){
     const s={user:data.user,org:data.org};
     localStorage.setItem('ss_session',JSON.stringify(s));
-    setSession(s);setSection('chats');
+    return s;
   }
-  function logout(){ api.setToken(null); localStorage.removeItem('ss_session'); setSession(null); }
-  function onDeleteOrg(){ localStorage.removeItem('ss_session'); setSession(null); }
 
-  if(!session) return <AuthScreen onLogin={onLogin}/>;
+  function onLogin(data){
+    setSession(saveSession(data));
+    setSection('chats');
+  }
+
+  function onSessionUpdate(data){
+    setSession(saveSession(data));
+    setSection('chats');
+  }
+
+  function logout(){
+    api.setToken(null);
+    localStorage.removeItem('ss_session');
+    setSession(null);
+  }
+
+  if(!session)return<AuthScreen onLogin={onLogin}/>;
 
   const {user,org}=session;
   const isAdmin=user.role==='admin';
+
+  // Сотрудник зарегистрирован, но ещё не в организации
+  if(!org){
+    return<PendingScreen session={session} onSessionUpdate={onSessionUpdate} onLogout={logout}/>;
+  }
 
   return(
     <div className="app">
@@ -748,9 +851,8 @@ function App(){
             <span className="sidebar-logo-name">SecureShare</span>
           </div>
           <div className="sidebar-org">
-            <div>
+            <div style={{flex:1,minWidth:0}}>
               <div className="sidebar-org-name">{org.name}</div>
-              <div style={{fontSize:11,color:'var(--text3)',fontFamily:'monospace'}}>{org.code}</div>
             </div>
             <span className="badge-role">{isAdmin?'Admin':'User'}</span>
           </div>
@@ -758,36 +860,22 @@ function App(){
         <nav className="sidebar-nav">
           <div className="nav-section">
             <div className="nav-section-title">Сообщения</div>
-            {[
-              {id:'chats',    label:'Внутренние чаты', icon:<Ico.Chat/>},
-              {id:'interorg', label:'Межорг. чаты',     icon:<Ico.Globe/>},
-            ].map(({id,label,icon})=>(
-              <div key={id} className={`nav-item ${section===id?'active':''}`} onClick={()=>setSection(id)}>
-                <span className="icon">{icon}</span> {label}
-              </div>
-            ))}
+            <div className={`nav-item ${section==='chats'?'active':''}`} onClick={()=>setSection('chats')}><span className="ni"><Ico.Chat/></span> Внутренние чаты</div>
+            <div className={`nav-item ${section==='interorg'?'active':''}`} onClick={()=>setSection('interorg')}><span className="ni"><Ico.Globe/></span> Межорг. чаты</div>
           </div>
           <div className="nav-section">
             <div className="nav-section-title">Документы</div>
-            <div className={`nav-item ${section==='orgfiles'?'active':''}`} onClick={()=>setSection('orgfiles')}>
-              <span className="icon"><Ico.File/></span> Файлы организации
-            </div>
+            <div className={`nav-item ${section==='orgfiles'?'active':''}`} onClick={()=>setSection('orgfiles')}><span className="ni"><Ico.File/></span> Файлы организации</div>
           </div>
           <div className="nav-section">
             <div className="nav-section-title">Управление</div>
-            {[
-              {id:'employees', label:'Сотрудники',  icon:<Ico.Users/>},
-              {id:'settings',  label:'Настройки',   icon:<Ico.Cog/>},
-            ].map(({id,label,icon})=>(
-              <div key={id} className={`nav-item ${section===id?'active':''}`} onClick={()=>setSection(id)}>
-                <span className="icon">{icon}</span> {label}
-              </div>
-            ))}
+            <div className={`nav-item ${section==='employees'?'active':''}`} onClick={()=>setSection('employees')}><span className="ni"><Ico.Users/></span> Сотрудники</div>
+            <div className={`nav-item ${section==='settings'?'active':''}`} onClick={()=>setSection('settings')}><span className="ni"><Ico.Cog/></span> Настройки</div>
           </div>
         </nav>
         <div className="sidebar-footer">
           <div className="user-info">
-            <Av name={user.name} size={34}/>
+            <Av name={user.name} size={32}/>
             <div style={{flex:1,minWidth:0}}>
               <div className="user-name">{user.name}</div>
               <div className="user-role">{isAdmin?'Администратор':'Сотрудник'}</div>
@@ -796,13 +884,12 @@ function App(){
           </div>
         </div>
       </div>
-
       <div className="main">
-        {section==='chats'    &&<ChatView    key="in"  session={session} isInterOrg={false}/>}
-        {section==='interorg' &&<ChatView    key="io"  session={session} isInterOrg={true}/>}
-        {section==='orgfiles' &&<OrgFiles              session={session}/>}
-        {section==='employees'&&<Employees             session={session}/>}
-        {section==='settings' &&<Settings              session={session} onDeleteOrg={onDeleteOrg}/>}
+        {section==='chats'    &&<ChatView key="in"  session={session} isInterOrg={false}/>}
+        {section==='interorg' &&<ChatView key="io"  session={session} isInterOrg={true}/>}
+        {section==='orgfiles' &&<OrgFiles           session={session}/>}
+        {section==='employees'&&<Employees          session={session}/>}
+        {section==='settings' &&<Settings           session={session} onDeleteOrg={logout}/>}
       </div>
     </div>
   );
